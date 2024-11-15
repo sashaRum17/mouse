@@ -36,6 +36,6 @@ void loop()
   ///////// ACT /////////
   // Приведение управляющих воздействий в действие и логирование данных  
   Serial.print(left_phi);
-  Serial.print("   ");
+  
   Serial.println(right_phi);
 }

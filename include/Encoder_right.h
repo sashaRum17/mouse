@@ -4,6 +4,7 @@
 
 #define RIGHT_CLOCK_A_PIN 3
 #define RIGHT_B_PIN 5
+#define x 2
 
 #define RIGHT_ENC_DIR 1 // отриц направление -1
 
