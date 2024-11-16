@@ -2,12 +2,6 @@
 #include <Arduino.h>
 #include "Config.h"
 
-#define RIGHT_CLOCK_A_PIN 3
-#define RIGHT_B_PIN 5
-#define x 2
-
-#define RIGHT_ENC_DIR 1 // отриц направление -1
-
 void right_enc_handler();
 
 volatile int g_right_counter = 0;
