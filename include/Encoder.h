@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "Config.h"
 
+
 struct EncoderConnectionParams
 {
     int CLK_A_PIN;
@@ -32,15 +33,15 @@ public:
         noInterrupts();
         attachInterrupt(digitalPinToInterrupt(CLK_A_PIN), ISR_CALLBACK, CHANGE);
 
-        ETT[0b00][0b01] = LEFT_ENC_DIR;
-        ETT[0b01][0b11] = LEFT_ENC_DIR;
-        ETT[0b11][0b10] = LEFT_ENC_DIR;
-        ETT[0b10][0b00] = LEFT_ENC_DIR;
+        ETT[0b00][0b01] = ENC_DIR;
+        ETT[0b01][0b11] = ENC_DIR;
+        ETT[0b11][0b10] = ENC_DIR;
+        ETT[0b10][0b00] = ENC_DIR;
 
-        ETT[0b00][0b10] = -LEFT_ENC_DIR;
-        ETT[0b10][0b11] = -LEFT_ENC_DIR;
-        ETT[0b11][0b01] = -LEFT_ENC_DIR;
-        ETT[0b01][0b00] = -LEFT_ENC_DIR;
+        ETT[0b00][0b10] = -ENC_DIR;
+        ETT[0b10][0b11] = -ENC_DIR;
+        ETT[0b11][0b01] = -ENC_DIR;
+        ETT[0b01][0b00] = -ENC_DIR;
 
         interrupts();
     }
