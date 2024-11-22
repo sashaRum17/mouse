@@ -18,3 +18,6 @@
 
 #define LPF_ALPHA (0.5)
 
+#define R 0.016
+#define WIDHT 0.07 
+
