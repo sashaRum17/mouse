@@ -1,8 +1,7 @@
-#pragma once
 
+#pragma once
 #include "Config.h"
-#include "Encoder_right.h"
-#include "Encoder_left.h"
+
 
 
 float left_vel_estimator(float phi)
@@ -53,8 +52,8 @@ float g_right_w = 0;
 
 void velest_tick()
 {
-    const float left_phi = g_left_phi;
-    const float right_phi = g_right_phi;
+    const float left_phi = leftEncoder.q_phi;
+    const float right_phi = rightEncoder.q_phi;
     const float left_w_raw = left_vel_estimator(left_phi);
     const float right_w_raw = right_vel_estimator(right_phi);
 

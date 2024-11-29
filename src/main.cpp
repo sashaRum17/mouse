@@ -4,7 +4,7 @@
 #include "VelEstimator.h"
 #include "Devices.h"
 #include "Encoder.h"
-#include "adometry.h"
+#include "odometry.h"
 
 void setup()
 {
