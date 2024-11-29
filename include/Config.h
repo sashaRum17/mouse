@@ -19,5 +19,7 @@
 #define LPF_ALPHA (0.5)
 
 #define R 0.016
-#define WIDHT 0.07 
+#define WIDHT 0.07
+
+#define BATTERY_VOLTS 7
 

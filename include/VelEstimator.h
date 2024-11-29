@@ -1,7 +1,8 @@
 
 #pragma once
 #include "Config.h"
-
+#include "Encoder.h"
+#include "Devices.h"
 
 
 float left_vel_estimator(float phi)

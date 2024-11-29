@@ -5,6 +5,7 @@
 #include "Devices.h"
 #include "Encoder.h"
 #include "odometry.h"
+#include "Battery.h"
 
 void setup()
 {
@@ -40,9 +41,7 @@ void loop()
   deltmath();
   ///////// ACT /////////
   // Приведение управляющих воздействий в действие и логирование данных
-  Serial.print(x*100);
-  Serial.print(" ");
-  Serial.print(y*100);
-  Serial.print("  ");
-  Serial.println(teta);
+  Battery volt;
+  float Volts = volt.getVolts();
+  Serial.println(Volts);
 }
