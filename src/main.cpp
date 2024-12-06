@@ -6,6 +6,8 @@
 #include "Encoder.h"
 #include "odometry.h"
 #include "Battery.h"
+#include "Motor.h"
+#include "Switch.h"
 
 void setup()
 {
@@ -28,20 +30,16 @@ void loop()
   // Считывание датчиков
   leftEncoder.tick();
   rightEncoder.tick();
-
-  // const float left_phi = g_left_phi;
-  // const float right_phi = g_right_phi;
-  // velest_tick();
-  // const float left_w = g_left_w;
-  // const float right_w = g_right_w;
+  
 
   ///////// PLAN /////////
   // Расчет управляющих воздействий
   coordinat();
   deltmath();
+  volt.getBatteryVolts();
+  decodeFunctionSwitch();
   ///////// ACT /////////
   // Приведение управляющих воздействий в действие и логирование данных
-  Battery volt;
-  float Volts = volt.getVolts();
-  Serial.println(Volts);
+ 
+  
 }

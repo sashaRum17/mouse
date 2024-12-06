@@ -15,11 +15,19 @@
 #define GEAR_RATIO 30
 
 #define tick_to_rad (2.0 * M_PI / (ENC_PPR * GEAR_RATIO))
-
 #define LPF_ALPHA (0.5)
 
 #define R 0.016
 #define WIDHT 0.07
 
-#define BATTERY_VOLTS 7
+#define BATTERY_VOLTS A7
+
+#define LEFT_DIR 7
+#define LEFT_PWM 9
+#define RIGHT_DIR 8
+#define RIGHT_PWM 10
+#define LEFT_MOTOR_POLARITY 1
+#define RIGHT_MOTOR_POLARITY 0
+#define FUNCTION_SELECT 6
+
 

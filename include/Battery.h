@@ -1,5 +1,7 @@
+#pragma once
 #include "Config.h"
 #include <Arduino.h>
+#include "Devices.h"
 
 class Battery
 {
@@ -12,7 +14,7 @@ public:
     {
         return batteryVolts;                                                                    
     }
-
+    
     void getBatteryVolts()
     {   
         int adcValue = analogRead(BATTERY_VOLTS);

@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "Config.h"
 #include "Encoder.h"
+#include "Battery.h"
 
 void left_ISR();
 void right_ISR();
@@ -34,3 +35,5 @@ void right_ISR()
 {
     rightEncoder.isr_callback();
 }
+
+Battery volt;
