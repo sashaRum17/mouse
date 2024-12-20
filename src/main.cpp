@@ -30,16 +30,17 @@ void loop()
   // Считывание датчиков
   leftEncoder.tick();
   rightEncoder.tick();
-  
 
   ///////// PLAN /////////
   // Расчет управляющих воздействий
   coordinat();
   deltmath();
-  volt.getBatteryVolts();
   decodeFunctionSwitch();
+  volt.getBatteryVolts();
+
   ///////// ACT /////////
   // Приведение управляющих воздействий в действие и логирование данных
-  drive_right(6);
-  
+  drive_math_left(5);
+
+ 
 }

@@ -1,27 +1,27 @@
 
 #pragma once
+#include <Arduino.h>
 #include "Config.h"
 #include "Encoder.h"
 #include "Devices.h"
-
 
 float left_vel_estimator(float phi)
 {
     // init
     static float phi_old = 0;
 
-    //tick
-    float w_raw = (phi-phi_old) / Ts_s;
+    // tick
+    float w_raw = (phi - phi_old) / Ts_s;
     phi_old = phi;
 
     return w_raw;
 }
 
-float  left_low_pass_filter(float w_raw)
+float left_low_pass_filter(float w_raw)
 {
-    //init
+    // init
     static float w = 0;
-    w += (w_raw - w)* LPF_ALPHA;
+    w += (w_raw - w) * LPF_ALPHA;
 
     return w;
 }
@@ -31,19 +31,18 @@ float right_vel_estimator(float phi)
     // init
     static float phi_old = 0;
 
-    //tick
-    float w_raw = (phi-phi_old) / Ts_s;
+    // tick
+    float w_raw = (phi - phi_old) / Ts_s;
     phi_old = phi;
 
     return w_raw;
-    
 }
 
-float  right_low_pass_filter(float w_raw)
+float right_low_pass_filter(float w_raw)
 {
-    //init
+    // init
     static float w = 0;
-    w += (w_raw - w)* LPF_ALPHA;
+    w += (w_raw - w) * LPF_ALPHA;
 
     return w;
 }
@@ -60,4 +59,5 @@ void velest_tick()
 
     g_left_w = left_low_pass_filter(left_w_raw);
     g_right_w = right_low_pass_filter(right_w_raw);
+   
 }
