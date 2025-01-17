@@ -37,10 +37,11 @@ void loop()
   deltmath();
   decodeFunctionSwitch();
   volt.getBatteryVolts();
+ // w_drive(2,2);
 
   ///////// ACT /////////
   // Приведение управляющих воздействий в действие и логирование данных
-  drive_math_left(5);
+ drive_right(4);
+ drive_left(4);
 
- 
 }

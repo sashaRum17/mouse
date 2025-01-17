@@ -30,4 +30,12 @@
 #define RIGHT_MOTOR_POLARITY 0
 #define FUNCTION_SELECT 6
 
+#define CYC_PROG_BUF_SIZE 64
+#define FORW_SPEED 1
+#define WHEEL_RADIUS 0.016
+
+#define max_output 5
+
+#define HEADING_VEL_TO_DELTA_W ((WIDHT / WHEEL_RADIUS) * 0.5f)
+
 
