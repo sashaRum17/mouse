@@ -8,8 +8,9 @@ void drive_left(float u)
 {
     volt.getBatteryVolts();
     float Volts = volt.getVolts();
-    Serial.println(Volts);
-    int pwm = 255.0 * (u / Volts);
+
+    float pwm = (255.0 * (u / Volts));
+
     pwm = constrain(pwm, -255, 255);
 
     if (pwm >= 0)
@@ -29,9 +30,11 @@ void drive_right(float u)
     volt.getBatteryVolts();
     float Volts = volt.getVolts();
 
-    int pwm = 255.0 * (u / Volts);
+    float pwm = (255.0 * (u / Volts));
+  
     pwm = constrain(pwm, -255, 255);
-
+    
+    
     if (pwm >= 0)
     {
         digitalWrite(RIGHT_DIR, RIGHT_MOTOR_POLARITY);
@@ -55,13 +58,12 @@ void drive_math_left(int w0)
         I += dI;
     }
     u = kP * e + I;
-
     drive_left(u);
 }
 
 void drive_math_right(int w0)
 {
-    float kP = 0, kM = 0, dI, u;
+    float kP = 5, kM = 0, dI, u;
     float e = w0 - g_right_w;
 
     static float I = 0;
@@ -77,13 +79,15 @@ void drive_math_right(int w0)
 void w_drive(float forwardVel, float headingVel)
 {
     float theta_i0 = forwardVel / WHEEL_RADIUS;
-
     const float deltW = headingVel * HEADING_VEL_TO_DELTA_W;
 
     float gLeftW = theta_i0 - deltW;
     float gRightW = theta_i0 + deltW;
 
     drive_math_left(gLeftW);
+   
+    Serial.print(gLeftW);
+     Serial.print("; ");
+     Serial.println(gRightW);
     drive_math_right(gRightW);
-    
 }

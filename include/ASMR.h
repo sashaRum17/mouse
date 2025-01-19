@@ -105,8 +105,8 @@ public:
 
         s.time = millis() / 1000.0 - lastProgStart;
 
-        Serial.print(s.time);
-        Serial.print(" ");
+        // Serial.print(s.time);
+        // Serial.print(" ");
 
         cycProgram[cycProgCounter](&ms, s);
 
@@ -117,7 +117,7 @@ public:
         }
 
         // Drive at speeds
-        Serial.println(String(ms.v_f0) + " " + String(ms.theta_i0) + " " + String(ms.is_completed));
+       // Serial.println(String(ms.v_f0) + " " + String(ms.theta_i0) + " " + String(ms.is_completed));
     }
 };
 
