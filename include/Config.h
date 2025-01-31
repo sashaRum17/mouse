@@ -17,9 +17,10 @@
 #define tick_to_rad (2.0 * M_PI / (ENC_PPR * GEAR_RATIO))
 #define LPF_ALPHA (0.5)
 
+// Mouse params
 #define R 0.016
 #define WIDHT 0.07
-
+#define HEADING_VEL_TO_DELTA_W ((WIDHT / WHEEL_RADIUS) * 0.5f)
 #define BATTERY_VOLTS A7
 
 #define LEFT_DIR 7
@@ -36,6 +37,11 @@
 
 #define max_output 5
 
-#define HEADING_VEL_TO_DELTA_W ((WIDHT / WHEEL_RADIUS) * 0.5f)
+#define Tmu (32 * Ts_s)
+#define kM (6/1.5)
+#define Tm 0.21
+#define k1 (1 / (2*Tmu*kM))
+
+
 
 
