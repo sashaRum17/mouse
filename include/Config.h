@@ -11,6 +11,17 @@
 #define RIGHT_B_PIN 5
 #define RIGHT_ENC_DIR 1 // отриц направление -1
 
+#define LEFT_DIR 7
+#define LEFT_PWM 9
+#define RIGHT_DIR 8
+#define RIGHT_PWM 10
+
+#define LEFT_MOTOR_POLARITY 1
+#define RIGHT_MOTOR_POLARITY 0
+
+#define FUNCTION_SELECT 6
+
+//ENC PARAMS
 #define ENC_PPR 48 // тиков на оборот энкодера
 #define GEAR_RATIO 30
 
@@ -18,25 +29,16 @@
 #define LPF_ALPHA (0.5)
 
 // Mouse params
-#define R 0.016
+#define WHEEL_RADIUS 0.016
 #define WIDHT 0.07
 #define HEADING_VEL_TO_DELTA_W ((WIDHT / WHEEL_RADIUS) * 0.5f)
 #define BATTERY_VOLTS A7
-
-#define LEFT_DIR 7
-#define LEFT_PWM 9
-#define RIGHT_DIR 8
-#define RIGHT_PWM 10
-#define LEFT_MOTOR_POLARITY 1
-#define RIGHT_MOTOR_POLARITY 0
-#define FUNCTION_SELECT 6
-
+#define CELL_SIZE 0.18
 #define CYC_PROG_BUF_SIZE 64
-#define FORW_SPEED 1
-#define WHEEL_RADIUS 0.016
-
+#define FORW_SPEED 0.2
 #define max_output 5
 
+//K
 #define Tmu (32 * Ts_s)
 #define kM (6/1.5)
 #define Tm 0.21

@@ -14,8 +14,8 @@ float R_phi_old ;
 
 void deltmath()
 {
-    dSl = (leftEncoder.q_phi - L_phi_old) * R;
-    dSr = (rightEncoder.q_phi - R_phi_old) * R;
+    dSl = (leftEncoder.q_phi - L_phi_old) * WHEEL_RADIUS;
+    dSr = (rightEncoder.q_phi - R_phi_old) * WHEEL_RADIUS;
     dSf = (dSl + dSr) / 2;
 
     d_teta = (dSr - dSl) / WIDHT;

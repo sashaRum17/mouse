@@ -96,11 +96,5 @@ void w_drive(float forwardVel, float headingVel)
 
     drive_math_left(gLeftW);
     drive_math_right(gRightW);
-    Serial.print(vf0);
-    Serial.print(";  ");
-    Serial.print(deltW);
-    Serial.print(";  ");
-    Serial.print(gLeftW);
-    Serial.print(";  ");
-    Serial.println(gRightW);
+  ;
 }

@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "Config.h"
+#include "Motor.h"
 
 struct Sensors
 {
@@ -17,7 +18,7 @@ struct MotionState
     bool is_completed;
 };
 
-typedef void (*Cyclogram)(MotionState*, Sensors);
+typedef void (*Cyclogram)(MotionState *, Sensors);
 #define CYCLOGRAM(name) void name(MotionState *ms, Sensors s)
 
 CYCLOGRAM(STOP)
@@ -41,10 +42,14 @@ CYCLOGRAM(FWD)
     ms->theta_i0 = 0;
 
     // Логика перехода
-    if (s.time >= 1.8)
-    // ЗАМЕНИТЕ 1.8 НА ПЕРЕСЧЕТ ПО СКОРОСТИ И РАЗМЕРУ ЯЧЕЙКИ
+    if (s.time >= (CELL_SIZE / FORW_SPEED))
     {
+        Serial.print("DONE");
         ms->is_completed = true;
+    }
+    else
+    {
+        ms->is_completed = false;
     }
 }
 
@@ -74,6 +79,7 @@ CYCLOGRAM(SS90EL)
 class ASMR
 {
 private:
+
     Cyclogram cycProgram[CYC_PROG_BUF_SIZE] = {IDLE};
     int cycProgCounter = 0;
     int cycEnd = 0;
@@ -89,9 +95,9 @@ private:
     {
         cycProgCounter = rotmod(cycProgCounter + 1);
     }
-   
 
 public:
+  
     void addAction(Cyclogram cyc)
     {
         cycEnd = rotmod(cycEnd + 1);
@@ -105,20 +111,18 @@ public:
 
         s.time = millis() / 1000.0 - lastProgStart;
 
-        // Serial.print(s.time);
-        // Serial.print(" ");
-
         cycProgram[cycProgCounter](&ms, s);
 
-        if(ms.is_completed)
+        if (ms.is_completed)
         {
             incProgCounter();
             lastProgStart = millis() / 1000.0;
         }
 
         // Drive at speeds
-       // Serial.println(String(ms.v_f0) + " " + String(ms.theta_i0) + " " + String(ms.is_completed));
+    
+        w_drive(ms.v_f0, ms.theta_i0);
+     
+        // Serial.println(String(ms.v_f0) + " " + String(ms.theta_i0) + " " + String(ms.is_completed));
     }
 };
-
-
