@@ -44,7 +44,6 @@ CYCLOGRAM(FWD)
     // Логика перехода
     if (s.time >= (CELL_SIZE / FORW_SPEED))
     {
-        Serial.print("DONE");
         ms->is_completed = true;
     }
     else

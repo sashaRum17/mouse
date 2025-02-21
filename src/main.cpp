@@ -20,8 +20,8 @@ void setup()
   leftEncoder.init();
   rightEncoder.init();
 
-  asmr.addAction(FWD);
-  asmr.addAction(STOP);
+  //asmr.addAction(FWD);
+  //asmr.addAction(STOP);
 }
 
 void loop()
@@ -46,6 +46,12 @@ void loop()
   volt.getBatteryVolts();
 
   ///////// ACT /////////
-  // Приведение управляющих воздействий в действие и логирование данных
  asmr.exec();
+ Battery volts;
+
+  float Volts = volt.getVolts();
+  
+  Serial.println(Volts);
+  drive_left(5);
+  drive_right(5);
 }

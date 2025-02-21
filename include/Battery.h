@@ -18,7 +18,8 @@ public:
     void getBatteryVolts()
     {   
         int adcValue = analogRead(BATTERY_VOLTS);
-        
+        Serial.print(adcValue);
+        Serial.print("  ");
         batteryVolts = adcValue * (5.0f * batteryDividerRatio / 1023.0f);
     }
 };
