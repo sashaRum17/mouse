@@ -6,6 +6,7 @@
 #include "Config.h"
 #include "Motor.h"
 
+
 struct Sensors
 {
     float time;
@@ -78,7 +79,6 @@ CYCLOGRAM(SS90EL)
 class ASMR
 {
 private:
-
     Cyclogram cycProgram[CYC_PROG_BUF_SIZE] = {IDLE};
     int cycProgCounter = 0;
     int cycEnd = 0;

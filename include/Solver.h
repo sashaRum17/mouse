@@ -1,5 +1,5 @@
 #pragma once
-#include "Mase.h"
+#include "Maze.h"
 #include "Config.h"
 const int MAX_SIZE = 64;
 
@@ -7,7 +7,7 @@ template<typename T>
 
 class Queue{
 private:
-    int arr[MAX_SIZE];
+    T arr[MAX_SIZE];
     int begin;
     int end;
 
@@ -27,9 +27,9 @@ public:
         return isEmpty();
     }
 
-    bool push_back(int x)
+    bool push_back(T x)
     {
-        arr[end]= x;
+        arr[end] = x;
         end = (end+1) % MAX_SIZE;
         return isFull();
     }
@@ -61,15 +61,16 @@ private:
     };
 
     Queue<Vec2> queue;
+
     WhereFrom whereFrom[MAZE_WIDTH][MAZE_HEIGHT] = {WhereFrom :: UNKNOWN};
 
 public:
-    void findPath(Vec2 start, Vec2 end, Vec2 *maze)
+    void findPath(Vec2 start, Vec2 end, Maze *maze)
     {
         for(int i = 0; i < MAZE_WIDTH; i++){
             for(int j=0; j < MAZE_HEIGHT; j++)
             {
-                WhereFrom[i][j] = WhereFrom::UNKNOWN;
+                whereFrom[i][j] = WhereFrom::UNKNOWN;
             }
         }
         //Добавляем конечную точку в очередь
@@ -79,28 +80,65 @@ public:
         {
             //Берем текущую точку из очереди
             Vec2 current = queue.pop_front();
-            Maze::CellWalls cell = maze ->getWalls(current);
+
+            Maze::CellWalls cell = maze->getWalls(current);
 
             if(cell.left != Maze::WALL){
                 Vec2 left = {current.x-1, current.y};
-                whereFrom[left.x][left.y] = WhereFrom::RIGHT;
-                queue.push_back(left);
+                if (whereFrom[left.x][left.y] == WhereFrom::UNKNOWN)
+                {
+                    whereFrom[left.x][left.y]== WhereFrom::RIGHT;
+
+                    if(left.x == start.x && left.y == start.y)
+                    {
+                        return;
+                    }
+
+                    queue.push_back(left);
+                }
+        
             }
-            if(cell.left != Maze::WALL){
+            
+            if(cell.right != Maze::WALL){
                 Vec2 right = {current.x+1, current.y};
-                whereFrom[right.x][right.y] = WhereFrom::LEFT;
-                queue.push_back(right);
+                if(whereFrom[right.x][right.y] == WhereFrom::UNKNOWN)
+                {
+                    whereFrom[right.x][right.y] = WhereFrom::LEFT;
+
+                    if(right.x == start.x && right.y == start.y)
+                    {
+                        return;
+                    }
+                    queue.push_back(right);
+                }  
             }
-            if(cell.left != Maze::WALL){
+
+            if(cell.up != Maze::WALL){
                 Vec2 up = {current.x, current.y-1};
-                whereFrom[up.x][up.y] = WhereFrom::DOWN;
-                queue.push_back(up);
+                if(whereFrom[up.x][up.y] == WhereFrom::UNKNOWN)
+                {
+                    whereFrom[up.x][up.y] == WhereFrom::DOWN;
+                    if(up.x == start.x && up.y == start.y)
+                    {
+                        return;
+                    }
+                    queue.push_back(up);
+                }
             }
-            if(cell.left != Maze::WALL){
+            if(cell.down != Maze::WALL){
                 Vec2 down = {current.x, current.y+1};
-                whereFrom[down.x][down.y] = WhereFrom::UP;
-                queue.push_back(down);
+                if(whereFrom[down.x][down.y] == WhereFrom::UNKNOWN)
+                {
+                   whereFrom[down.x][down.y] = WhereFrom::UP; 
+                   if(down.x == start.x && down.y == start.y)
+                   {
+                       return;
+                   }
+                   queue.push_back(down);
+                }
+                
             }
         }
-    }
+    } 
+   
 };

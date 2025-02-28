@@ -9,19 +9,50 @@
 #include "Motor.h"
 #include "Switch.h"
 #include "ASMR.h"
+#include "Maze.h"
+#include "MazeDrawer.h"
+#include "Solver.h"
 
 ASMR asmr;
+Battery volts;
+Maze maze;
+
+void mazeTestCreate()
+{
+  maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
+  maze.setWall(Vec2{6, 2}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
+  maze.setWall(Vec2{3, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
+  maze.setWall(Vec2{2, 3}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
+  maze.setWall(Vec2{4, 3}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
+
+  Serial.println();
+
+  drawMaze(maze, MAZE_WIDTH, MAZE_HEIGHT);
+}
+
+void solverVerifity()
+{
+  Solver solver;
+  Vec2 start = {1,1};
+  Vec2 end = {4,4};
+
+  solver.findPath(start, end, &maze);
+
+  Serial.println();
+  drawMaze(maze, solver, MAZE_WIDTH, MAZE_HEIGHT);
+
+
+}
 
 void setup()
 {
   ///////// INIT /////////
   Serial.begin(9600);
-
-  leftEncoder.init();
-  rightEncoder.init();
-
-  //asmr.addAction(FWD);
-  //asmr.addAction(STOP);
+  mazeTestCreate();
+  solverVerifity();
+  while (1)
+  {
+  }
 }
 
 void loop()
@@ -46,12 +77,5 @@ void loop()
   volt.getBatteryVolts();
 
   ///////// ACT /////////
- asmr.exec();
- Battery volts;
-
-  float Volts = volt.getVolts();
-  
-  Serial.println(Volts);
-  drive_left(5);
-  drive_right(5);
+  asmr.exec();
 }
