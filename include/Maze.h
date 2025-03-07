@@ -97,6 +97,7 @@ public:
             {
                 return map[cell_id - MAZE_WIDTH / 2].lodown;
             }
+            return map[cell_id - MAZE_WIDTH / 2].hidown;
         }
         return WALL;
     }

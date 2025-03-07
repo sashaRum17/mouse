@@ -7,7 +7,7 @@
 #define ICON_WALL_HORIZONTAL "---"
 #define ICON_UNKNOWN_HORIZONTAL " . "
 #define ICON_UNKNOWN_VERTICAL "."
-#define ICON_OPEN_HORIZONTAL "  "
+#define ICON_OPEN_HORIZONTAL "   "
 #define ICON_OPEN_VERTICAL " "
 
 void drawMaze(Maze &maze, int width, int height)
@@ -126,9 +126,9 @@ void drawMaze(Maze &maze, Solver &solver, int widht, int height)
             {
                 Serial.print(ICON_OPEN_VERTICAL);
             }
-            Serial.print(ICON_OPEN_HORIZONTAL);
-
-           
+            Serial.print(" ");
+            Serial.print(solver.getWhereFrom(Vec2{x, y})); 
+            Serial.print(" ");
         }
 
         Maze::CellWalls lastCell = maze.getWalls(Vec2{widht - 1, y});
@@ -151,11 +151,11 @@ void drawMaze(Maze &maze, Solver &solver, int widht, int height)
         Serial.print("x");
         if (cell.down == Maze::WALL)
         {
-            Serial.println(ICON_WALL_HORIZONTAL);
+            Serial.print(ICON_WALL_HORIZONTAL);
         }
         else if (cell.down == Maze::UNKNOWN)
         {
-            Serial.println(ICON_UNKNOWN_HORIZONTAL);
+            Serial.print(ICON_UNKNOWN_HORIZONTAL);
         }
         else
         {

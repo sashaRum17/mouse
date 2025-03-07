@@ -20,8 +20,8 @@ Maze maze;
 void mazeTestCreate()
 {
   maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
-  maze.setWall(Vec2{6, 2}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
   maze.setWall(Vec2{3, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
+  maze.setWall(Vec2{1, 2}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
   maze.setWall(Vec2{2, 3}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{4, 3}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
 
@@ -33,14 +33,13 @@ void mazeTestCreate()
 void solverVerifity()
 {
   Solver solver;
-  Vec2 start = {1,1};
-  Vec2 end = {4,4};
+  Vec2 start = {1,0};
+  Vec2 end = {2,3};
 
   solver.findPath(start, end, &maze);
 
   Serial.println();
   drawMaze(maze, solver, MAZE_WIDTH, MAZE_HEIGHT);
-
 
 }
 

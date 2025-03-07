@@ -78,7 +78,7 @@ public:
 
         while(!queue.isEmpty())
         {
-            //Берем текущую точку из очереди
+            //Берем текущую точку из очереди    
             Vec2 current = queue.pop_front();
 
             Maze::CellWalls cell = maze->getWalls(current);
@@ -87,7 +87,7 @@ public:
                 Vec2 left = {current.x-1, current.y};
                 if (whereFrom[left.x][left.y] == WhereFrom::UNKNOWN)
                 {
-                    whereFrom[left.x][left.y]== WhereFrom::RIGHT;
+                    whereFrom[left.x][left.y] == WhereFrom::RIGHT;
 
                     if(left.x == start.x && left.y == start.y)
                     {
@@ -135,10 +135,14 @@ public:
                        return;
                    }
                    queue.push_back(down);
-                }
-                
+                }   
             }
         }
-    } 
+    }
+    char getWhereFrom(Vec2 coord)
+    {
+        char symbs[] = {'X', 'L', 'D', 'U', 'R'};
+        return symbs[(int)whereFrom[coord.x][coord.y]];
+    }
    
 };

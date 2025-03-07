@@ -48,7 +48,3 @@
 #define MAZE_HEIGHT 4
 #define MAZE_MEM_SIZE (MAZE_WIDTH * MAZE_HEIGHT / 2)
 #define SET_WALL(stored_wall, wall) stored_wall = (wall == Maze::UNKNOWN ? stored_wall : wall)
-
-
-
-
