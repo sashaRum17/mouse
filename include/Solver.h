@@ -73,6 +73,7 @@ public:
                 whereFrom[i][j] = WhereFrom::UNKNOWN;
             }
         }
+        queue.clear();
         //Добавляем конечную точку в очередь
         queue.push_back(end);
 
@@ -87,7 +88,7 @@ public:
                 Vec2 left = {current.x-1, current.y};
                 if (whereFrom[left.x][left.y] == WhereFrom::UNKNOWN)
                 {
-                    whereFrom[left.x][left.y] == WhereFrom::RIGHT;
+                    whereFrom[left.x][left.y] = WhereFrom::RIGHT;
 
                     if(left.x == start.x && left.y == start.y)
                     {
@@ -117,7 +118,7 @@ public:
                 Vec2 up = {current.x, current.y-1};
                 if(whereFrom[up.x][up.y] == WhereFrom::UNKNOWN)
                 {
-                    whereFrom[up.x][up.y] == WhereFrom::DOWN;
+                    whereFrom[up.x][up.y] = WhereFrom::DOWN;
                     if(up.x == start.x && up.y == start.y)
                     {
                         return;

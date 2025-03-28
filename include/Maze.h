@@ -3,8 +3,6 @@
 #include <inttypes.h>
 #include "Config.h"
 
-#define MAZE_WIDTH 8
-
 struct Vec2
 {
     int16_t x;
@@ -57,6 +55,18 @@ public:
             map[i].loright = UNKNOWN;
             map[i].hidown = UNKNOWN;
             map[i].hiright = UNKNOWN;
+        }
+        for(int x = 0; x < MAZE_WIDTH; x++)
+        {
+            CellWalls cell = {.left = UNKNOWN, .down = WALL, .up = UNKNOWN, .right = UNKNOWN};
+            Vec2 coord = {x, MAZE_HEIGHT - 1};
+            setWall(coord, cell);
+        }
+        for(int y = 0; y < MAZE_HEIGHT; y++)
+        {
+            CellWalls cell = {.left = UNKNOWN, .down = UNKNOWN, .up = UNKNOWN, .right = WALL};
+            Vec2 coord = {MAZE_WIDTH - 1, y};
+            setWall(coord, cell);
         }
     }
     void setWall(Vec2 coord, CellWalls cell_walls)
