@@ -6,7 +6,6 @@
 #include "Config.h"
 #include "Motor.h"
 
-
 struct Sensors
 {
     float time;
@@ -44,6 +43,22 @@ CYCLOGRAM(FWD)
 
     // Логика перехода
     if (s.time >= (CELL_SIZE / FORW_SPEED))
+    {
+        ms->is_completed = true;
+    }
+    else
+    {
+        ms->is_completed = false;
+    }
+}
+
+CYCLOGRAM(FWDH)
+{
+    ms->v_f0 = FORW_SPEED;
+    ms->theta_i0 = 0;
+
+    // Логика перехода
+    if (s.time >= ((CELL_SIZE / FORW_SPEED)/2))
     {
         ms->is_completed = true;
     }
@@ -96,7 +111,6 @@ private:
     }
 
 public:
-  
     void addAction(Cyclogram cyc)
     {
         cycEnd = rotmod(cycEnd + 1);
@@ -118,10 +132,10 @@ public:
             lastProgStart = millis() / 1000.0;
         }
 
-        // Drive at speeds
-    
+        
         w_drive(ms.v_f0, ms.theta_i0);
-     
-        // Serial.println(String(ms.v_f0) + " " + String(ms.theta_i0) + " " + String(ms.is_completed));
+
+        Serial.print(ms.v_f0);
+        Serial.println(ms.theta_i0);
     }
 };

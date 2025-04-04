@@ -36,5 +36,13 @@ void right_ISR()
     rightEncoder.isr_callback();
 }
 
+void init_asmr()
+{
+    
+}
+
 Battery volt;
+
+#include "Motor.h"
+
 

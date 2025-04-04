@@ -3,6 +3,11 @@
 #include <Arduino.h>
 #include "Devices.h"
 
+void battery_init()
+{
+    pinMode(BATTERY_VOLTS, INPUT);
+}
+
 class Battery
 {
 private:

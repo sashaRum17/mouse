@@ -4,6 +4,15 @@
 #include "Devices.h"
 #include "VelEstimator.h"
 
+void motor_init(){
+
+    pinMode(LEFT_DIR, OUTPUT);
+    pinMode(LEFT_PWM, OUTPUT);
+
+    pinMode(RIGHT_DIR, OUTPUT);
+    pinMode(RIGHT_PWM, OUTPUT);
+}
+
 void drive_left(float u)
 {
     volt.getBatteryVolts();
@@ -96,5 +105,5 @@ void w_drive(float forwardVel, float headingVel)
 
     drive_math_left(gLeftW);
     drive_math_right(gRightW);
-  ;
+  
 }

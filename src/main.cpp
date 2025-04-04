@@ -76,14 +76,18 @@ void solverVerifity()
 
 void setup()
 {
-  ///////// INIT /////////
   Serial.begin(9600);
+
+  leftEncoder.init();
+  rightEncoder.init();
+  
+  motor_init();
+  switch_init();
+  velest_tick();
   mazeTestCreate();
   solverVerifity();
-  while(1){
-
-  }
-  
+  asmr.addAction(FWD);
+ 
 }
 
 void loop()
@@ -96,18 +100,11 @@ void loop()
   timer = micros();
 
   ///////// SENSE /////////
-  // Считывание датчиков
+  velest_tick();
   leftEncoder.tick();
   rightEncoder.tick();
-
-  ///////// PLAN /////////
-  // Расчет управляющих воздействий
   coordinat();
   deltmath();
-  decodeFunctionSwitch();
-  volt.getBatteryVolts();
-
-  ///////// ACT /////////
   asmr.exec();
- 
+
 }
