@@ -23,8 +23,8 @@ void mazeTestCreate()
   maze.setWall(Vec2{0, 0}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
   maze.setWall(Vec2{2, 0}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::WALL});
   maze.setWall(Vec2{4, 0}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
-
-  maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::WALL});
+  
+  maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{3, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 1}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::WALL});
 
@@ -48,7 +48,8 @@ void mazeTestCreate()
   maze.setWall(Vec2{3, 6}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 6}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
 
-  maze.setWall(Vec2{1, 7}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::OPEN});
+  maze.setWall(Vec2{0, 7}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
+  maze.setWall(Vec2{1, 7}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{3, 7}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 7}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
 
@@ -79,9 +80,10 @@ void setup()
   Serial.begin(9600);
   mazeTestCreate();
   solverVerifity();
-  while (1)
-  {
+  while(1){
+
   }
+  
 }
 
 void loop()
@@ -107,4 +109,5 @@ void loop()
 
   ///////// ACT /////////
   asmr.exec();
+ 
 }

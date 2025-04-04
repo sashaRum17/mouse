@@ -94,7 +94,6 @@ public:
                     {
                         return;
                     }
-
                     queue.push_back(left);
                 }
         
