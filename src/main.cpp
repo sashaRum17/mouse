@@ -13,7 +13,6 @@
 #include "MazeDrawer.h"
 #include "Solver.h"
 
-
 ASMR asmr;
 Battery volts;
 Maze maze;
@@ -23,7 +22,7 @@ void mazeTestCreate()
   maze.setWall(Vec2{0, 0}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
   maze.setWall(Vec2{2, 0}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::WALL});
   maze.setWall(Vec2{4, 0}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
-  
+
   maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{3, 1}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::WALL, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 1}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::WALL});
@@ -39,7 +38,7 @@ void mazeTestCreate()
   maze.setWall(Vec2{1, 4}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::WALL});
   maze.setWall(Vec2{3, 4}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::WALL});
   maze.setWall(Vec2{5, 4}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
-  
+
   maze.setWall(Vec2{1, 5}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{3, 5}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::OPEN, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 5}, Maze::CellWalls{.left = Maze::WALL, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
@@ -53,9 +52,6 @@ void mazeTestCreate()
   maze.setWall(Vec2{3, 7}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::OPEN, .right = Maze::OPEN});
   maze.setWall(Vec2{5, 7}, Maze::CellWalls{.left = Maze::OPEN, .down = Maze::WALL, .up = Maze::WALL, .right = Maze::OPEN});
 
-
-  // maze.setWall(Vec2{1, 1}, Maze::CellWalls{.left = Maze::UNKNOWN, .down = Maze::WALL, .up = Maze::UNKNOWN, .right = Maze::UNKNOWN});
-
   Serial.println();
 
   drawMaze(maze, MAZE_WIDTH, MAZE_HEIGHT);
@@ -64,30 +60,28 @@ void mazeTestCreate()
 void solverVerifity()
 {
   Solver solver;
-  Vec2 start = {1,1};
-  Vec2 end = {3,4};
+  Vec2 start = {1, 1};
+  Vec2 end = {5, 7};
 
   solver.findPath(start, end, &maze);
 
   Serial.println();
   drawMaze(maze, solver, MAZE_WIDTH, MAZE_HEIGHT);
-
 }
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   leftEncoder.init();
   rightEncoder.init();
-  
+
   motor_init();
   switch_init();
   velest_tick();
-  mazeTestCreate();
-  solverVerifity();
-  asmr.addAction(FWD);
- 
+  // mazeTestCreate();
+  // solverVerifity();
+  // asmr.addAction(FWD);
 }
 
 void loop()
@@ -100,11 +94,19 @@ void loop()
   timer = micros();
 
   ///////// SENSE /////////
-  velest_tick();
+
   leftEncoder.tick();
   rightEncoder.tick();
-  coordinat();
+  velest_tick();
   deltmath();
+  coordinat();
   asmr.exec();
 
+ ///////// ACT ///////////
+  w_drive(0, PI);
+
+  Serial.print(g_left_w);
+  Serial.print(" ");
+  Serial.println(g_right_w);
+  
 }

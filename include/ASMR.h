@@ -135,7 +135,7 @@ public:
         
         w_drive(ms.v_f0, ms.theta_i0);
 
-        Serial.print(ms.v_f0);
-        Serial.println(ms.theta_i0);
+        // Serial.print(ms.v_f0);
+        // Serial.println(ms.theta_i0);
     }
 };

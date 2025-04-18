@@ -5,6 +5,9 @@
 #include "Encoder.h"
 #include "Devices.h"
 
+float g_left_w = 0;
+float g_right_w = 0;
+
 float left_vel_estimator(float phi)
 {
     // init
@@ -47,17 +50,15 @@ float right_low_pass_filter(float w_raw)
     return w;
 }
 
-float g_left_w = 0;
-float g_right_w = 0;
 
 void velest_tick()
 {
-    const float left_phi = leftEncoder.q_phi;
-    const float right_phi = rightEncoder.q_phi;
-    const float left_w_raw = left_vel_estimator(left_phi);
-    const float right_w_raw = right_vel_estimator(right_phi);
+    float left_phi = leftEncoder.q_phi;
+    float right_phi = rightEncoder.q_phi;
+    float left_w_raw = left_vel_estimator(left_phi);
+    float right_w_raw = right_vel_estimator(right_phi);
 
-    g_left_w = left_low_pass_filter(left_w_raw);
-    g_right_w = right_low_pass_filter(right_w_raw);
+     g_left_w = left_low_pass_filter(left_w_raw);
+     g_right_w = right_low_pass_filter(right_w_raw);
    
 }

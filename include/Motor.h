@@ -4,7 +4,11 @@
 #include "Devices.h"
 #include "VelEstimator.h"
 
-void motor_init(){
+extern float g_left_w;
+extern float g_right_w;
+
+void motor_init()
+{
 
     pinMode(LEFT_DIR, OUTPUT);
     pinMode(LEFT_PWM, OUTPUT);
@@ -58,6 +62,7 @@ void drive_right(float u)
 void drive_math_left(int w0)
 {
     float dI, u;
+    
     float e = w0 - g_left_w;
     static float I = 0;
 
@@ -78,22 +83,24 @@ void drive_math_left(int w0)
 void drive_math_right(int w0)
 {
     float dI, u;
+    
     float e = w0 - g_right_w;
 
     float kP = k1;
     float P = kP * e;
     float T1 = Tm;
-
+    float kI = k1 / T1;
+    
     static float I = 0;
     if (u == constrain(u, -max_output, max_output) || (e * u) < 0)
     {
-        float kI = k1 / T1;
         dI = e * Ts_s;
         I += dI;
     }
     u = P + I;
     drive_right(u);
 }
+
 
 void w_drive(float forwardVel, float headingVel)
 {
@@ -105,5 +112,4 @@ void w_drive(float forwardVel, float headingVel)
 
     drive_math_left(gLeftW);
     drive_math_right(gRightW);
-  
 }

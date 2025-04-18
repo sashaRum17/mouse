@@ -60,6 +60,7 @@ public:
 
         counter += ETT[enc_old][enc];
         enc_old = enc;
+        
     }
 
     void tick()
@@ -72,6 +73,6 @@ public:
         phi += counter_inc * tick_to_rad;
     }
 
-    void left_enc_tick() {}
+   
     
 };
